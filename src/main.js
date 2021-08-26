@@ -1,4 +1,17 @@
 import { createApp } from "vue";
 import App from "./App.vue";
-
-createApp(App).mount("#app");
+import Router from "../src/router/router.js";
+import axios from "axios";
+import VueAxios from "vue-axios";
+import mitt from "mitt";
+import VueSweetalert2 from "vue-sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
+import cookie from "./plugins/cookie";
+const emitter = mitt();
+const app = createApp(App);
+app.use(Router);
+app.use(cookie);
+app.use(VueAxios, axios);
+app.config.globalProperties.emitter = emitter;
+app.use(VueSweetalert2);
+app.mount("#app");
